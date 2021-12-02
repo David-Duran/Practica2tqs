@@ -2,6 +2,7 @@ package io.cucumber.skeleton;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -24,6 +25,16 @@ public class WebStepDefinitions {
 
     private final WebDriver driver = new ChromeDriver();
     private Scenario scenario;
+
+
+    @BeforeAll
+    public static void setUp() {
+        // This property is optional.
+        // If not specified, WebDriver searches the path for chromedriver in your environment variables
+        // Example path for Linux or Mac:
+        System.setProperty("webdriver.chrome.driver", "src/Driver/chromedriver.exe");
+        //driver = new ChromeDriver();
+    }
 
     @Before
     public void before(Scenario scenario) {
