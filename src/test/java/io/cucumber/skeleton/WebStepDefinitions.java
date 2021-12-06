@@ -41,12 +41,12 @@ public class WebStepDefinitions {
         this.scenario = scenario;
     }
 
-    @Given("I go to the home page")
+    @Given("Voy a la pagina de inicio")
     public void iGoToTheHomePage() {
-        driver.get("https://www.oubiti.com");
+        driver.get("https://www.prozis.com/");
     }
 
-    @Then("I should see a {string} button/text")
+    @Then("Deberia ver el {string} button/text")
     public void iShouldSeeAButton(String text) {
         By byXPath = By.xpath("//*[contains(text(),'" + text + "')]");
         boolean present = driver.findElements(byXPath).size() > 0;
@@ -67,5 +67,15 @@ public class WebStepDefinitions {
     @After()
     public void closeBrowser() {
         driver.quit();
+    }
+
+    @Then("Deberia ver el boton de {string}")
+    public void deberiaVerElBotonDe(String boton) {
+        By byXPath = By.xpath("//*[contains(text(),'" + boton + "')]");
+        By id = By.xpath("//*[@id='register__link']");
+
+        boolean present = driver.findElements(id).size() > 0;
+
+        Assertions.assertTrue(present);
     }
 }
