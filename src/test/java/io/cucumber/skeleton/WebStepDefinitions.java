@@ -113,4 +113,9 @@ public class WebStepDefinitions {
     public void aceptoLasCookies() {
         driver.findElement(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")).click();
     }
+
+    @And("Espero {string} segundo")
+    public void esperoSegundo(String seconds) throws InterruptedException {
+        Thread.sleep(Integer.parseInt(seconds)*1000);
+    }
 }

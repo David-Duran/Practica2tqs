@@ -1,7 +1,6 @@
-Feature: Autenticacion
+Feature: Registro
   Como usuario de la página web
-  queremos registrarnos y logearnos
-  para comprobar el funcionamiento de la web
+  queremos registrarnos
 
   Scenario: Pagina de Registro
     Given Voy a la pagina de inicio
@@ -16,11 +15,11 @@ Feature: Autenticacion
     When Hago clic en el boton de "Crear cuenta"
     Then Deberia ver el boton de "CreateAccount_firstname"
     When Crear cuenta
+    And Espero "1" segundo
     Then Deberia ver el texto "Lo sentimos, se encontró un problema en los datos enviados."
 
   Scenario: Registro existente
     Given Voy a la pagina de inicio
-    Then Acepto las cookies
     Then Deberia ver el boton de "register__link"
     When Hago clic en el boton de "Crear cuenta"
     Then Deberia ver el boton de "CreateAccount_firstname"
@@ -32,8 +31,12 @@ Feature: Autenticacion
     And Inserto el texto "ivanjimenez.rakos@gmail.com" en el boton "CreateAccount_email_address"
     And Inserto el texto "practicatqs" en el boton "CreateAccount_password"
     And Inserto el texto "practicatqs" en el boton "CreateAccount_retype_password"
+    And Acepto las cookies
     And Acepto terminos
+
+    And Espero "1" segundo
     And Crear cuenta
+    And Espero "1" segundo
     Then Deberia ver el texto "Tu email ya se encuentra en nuestra base de datos."
 
 
