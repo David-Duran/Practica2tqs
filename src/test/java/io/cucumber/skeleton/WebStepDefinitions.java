@@ -11,6 +11,8 @@ import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebStepDefinitions {
 
@@ -71,11 +73,35 @@ public class WebStepDefinitions {
 
     @Then("Deberia ver el boton de {string}")
     public void deberiaVerElBotonDe(String boton) {
-        By byXPath = By.xpath("//*[contains(text(),'" + boton + "')]");
-        By id = By.xpath("//*[@id='register__link']");
-
-        boolean present = driver.findElements(id).size() > 0;
+        boolean present = driver.findElements(By.xpath("//*[contains(text(),'Crear cuenta')]")).size() > 0;
 
         Assertions.assertTrue(present);
     }
+
+    @When("Voy al carrito")
+    public void voyAlCarrito() throws InterruptedException {
+        driver.findElement(By.xpath("//*[@id=\"header_search_area\"]/div/div[3]/div/div[4]")).click();
+        Thread.sleep(500);    }
+
+    @Then("El carrito esta vacio")
+    public void elCarritoEstaVacio() {
+        // Aparece el mensaje "Tu carrito de la compra está vacío.!"
+        boolean present = driver.findElements(By.xpath("//*[@id=\"content\"]/div/div/section/div")).size()>0;
+        Assertions.assertTrue(present);
+    }
+
+    @Then("Deberia ver el texto {string}")
+    public void deberiaVerElTexto(String texto) {
+        By byXPath = By.xpath("//*[contains(text(),'" + texto + "')]");
+        boolean present = driver.findElements(byXPath).size() > 0;
+        Assertions.assertTrue(present);
+    }
+
+    @Then("Busco {string}")
+    public void busco(String text) throws InterruptedException{
+        driver.findElement(By.xpath("//*[@id=\"quick-search_query\"]")).sendKeys(text);
+        Thread.sleep(3000);
+    }
+
+
 }

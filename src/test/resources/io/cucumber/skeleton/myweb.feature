@@ -9,6 +9,18 @@ Feature: Autenticacion
     #Then Voy a la pagina de registro
     #Then Deberia ver el boton de "yt1"
 
+#Feature: Carrito
+#  El usuario entra a la pagina web
+#  comprueba que su carrito esta vacío
+#  añade productos al carrito
+#  comprueba que los productos se han añadido
+#  elimina los productos
+#  comprueba que los productos se han eliminado
+
+  Scenario: Carrito vacío
+    Given Voy a la pagina de inicio
+    When Voy al carrito
+    Then Deberia ver el texto "Tu carrito de la compra está vacío.!"
 
 
 
