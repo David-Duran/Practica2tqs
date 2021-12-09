@@ -13,6 +13,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.concurrent.TimeUnit;
+
 
 public class WebStepDefinitions {
 
@@ -44,21 +48,56 @@ public class WebStepDefinitions {
     }
 
     @Given("Voy a la pagina de inicio")
-    public void iGoToTheHomePage() {
+    public void iGoToTheHomePage() throws InterruptedException {
         driver.get("https://www.prozis.com/");
     }
 
-    @Then("Deberia ver el {string} button/text")
-    public void iShouldSeeAButton(String text) {
-        By byXPath = By.xpath("//*[contains(text(),'" + text + "')]");
+    @Then("Deberia ver el boton de {string}")
+    public void deberiaVerElBotonDe(String boton) {
+        By byXPath = By.xpath("//*[@id='" + boton + "']");
         boolean present = driver.findElements(byXPath).size() > 0;
         Assertions.assertTrue(present);
     }
 
-    @When("I click on {string} button")
-    public void iClickOnButton(String button_text) {
-        driver.findElement(By.linkText(button_text)).click();
+    @Then("Deberia ver el texto {string}")
+    public void deberiaVerElTexto(String texto) throws InterruptedException {
+        By byXPath = By.xpath("//*[contains(text(),'" + texto + "')]");
+        boolean present = driver.findElements(byXPath).size() > 0;
+        Assertions.assertTrue(present);
     }
+
+    @When("Hago clic en el boton de {string}")
+    public void hagoClicEnElBotonDe(String boton) {
+        driver.findElement(By.linkText(boton)).click();
+
+    }
+
+    @When("Crear cuenta")
+    public void crearCuenta() throws InterruptedException {
+        WebElement element = driver.findElement(By.name("yt0"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().perform();
+
+
+    }
+
+    @Then("Inserto el texto {string} en el boton {string}")
+    public void insertoElTextoEnElBoton(String valor, String input) {
+        driver.findElement(By.id(input)).sendKeys(valor);
+    }
+
+    @And("Selecciono el genero")
+    public void seleccionoElGenero() {
+        driver.findElement(By.id("CreateAccount_gender")).click();
+    }
+
+    @And("Acepto terminos")
+    public void aceptoTerminos() {
+        WebElement element = driver.findElement(By.id("terms_and_conditions"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().perform();
+    }
+
 
     @And("I take a screenshot with filename {string}")
     public void iTakeAScreenshotWithFilename(String filename) {
@@ -77,6 +116,10 @@ public class WebStepDefinitions {
 
         Assertions.assertTrue(present);
     }
+    @Then("Acepto las cookies")
+    public void aceptoLasCookies() {
+        driver.findElement(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")).click();
+    }
 
     @When("Voy al carrito")
     public void voyAlCarrito() throws InterruptedException {
@@ -88,6 +131,9 @@ public class WebStepDefinitions {
         // Aparece el mensaje "Tu carrito de la compra está vacío.!"
         boolean present = driver.findElements(By.xpath("//*[@id=\"content\"]/div/div/section/div")).size()>0;
         Assertions.assertTrue(present);
+    @And("Espero {string} segundo")
+    public void esperoSegundo(String seconds) throws InterruptedException {
+        Thread.sleep(Integer.parseInt(seconds)*1000);
     }
 
     @Then("Deberia ver el texto {string}")
