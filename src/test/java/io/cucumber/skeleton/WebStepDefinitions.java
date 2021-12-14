@@ -79,6 +79,11 @@ public class WebStepDefinitions {
         actions.moveToElement(element).click().perform();
     }
 
+    @When("Iniciar sesión")
+    public void iniciarSesion(){
+        driver.findElement(By.name("yt0")).click();
+    }
+
     @Then("Inserto el texto {string} en el boton {string}")
     public void insertoElTextoEnElBoton(String valor, String input) {
         driver.findElement(By.id(input)).sendKeys(valor);
