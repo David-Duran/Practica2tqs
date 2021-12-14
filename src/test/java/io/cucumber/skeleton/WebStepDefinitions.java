@@ -4,6 +4,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
 
-import java.util.concurrent.TimeUnit;
 
 
 public class WebStepDefinitions {
@@ -77,8 +77,6 @@ public class WebStepDefinitions {
         WebElement element = driver.findElement(By.name("yt0"));
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().perform();
-
-
     }
 
     @Then("Inserto el texto {string} en el boton {string}")
@@ -110,12 +108,6 @@ public class WebStepDefinitions {
         driver.quit();
     }
 
-    @Then("Deberia ver el boton de {string}")
-    public void deberiaVerElBotonDe(String boton) {
-        boolean present = driver.findElements(By.xpath("//*[contains(text(),'Crear cuenta')]")).size() > 0;
-
-        Assertions.assertTrue(present);
-    }
     @Then("Acepto las cookies")
     public void aceptoLasCookies() {
         driver.findElement(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")).click();
@@ -129,25 +121,55 @@ public class WebStepDefinitions {
     @Then("El carrito esta vacio")
     public void elCarritoEstaVacio() {
         // Aparece el mensaje "Tu carrito de la compra está vacío.!"
-        boolean present = driver.findElements(By.xpath("//*[@id=\"content\"]/div/div/section/div")).size()>0;
+        boolean present = driver.findElements(By.xpath("//*[@id=\"content\"]/div/div/section/div")).size() > 0;
         Assertions.assertTrue(present);
+    }
+
     @And("Espero {string} segundo")
     public void esperoSegundo(String seconds) throws InterruptedException {
         Thread.sleep(Integer.parseInt(seconds)*1000);
     }
 
-    @Then("Deberia ver el texto {string}")
-    public void deberiaVerElTexto(String texto) {
-        By byXPath = By.xpath("//*[contains(text(),'" + texto + "')]");
-        boolean present = driver.findElements(byXPath).size() > 0;
-        Assertions.assertTrue(present);
-    }
-
-    @Then("Busco {string}")
-    public void busco(String text) throws InterruptedException{
-        driver.findElement(By.xpath("//*[@id=\"quick-search_query\"]")).sendKeys(text);
-        Thread.sleep(3000);
+    @When("Busco {string}")
+    public void busco(String text) {
+        driver.findElement(By.xpath("//*[@id=\"quick-search_query\"]")).sendKeys(text + "\n");
     }
 
 
+    @When("Ordeno por {string}")
+    public void ordenoPor(String arg0){
+        Actions act = new Actions(driver);
+        WebElement element1= driver.findElement(By.xpath("//*[@id=\"modal-search\"]/div/div/div/div[2]/div[1]/div[1]/div/div[2]/a/span[1]"));
+        act.moveToElement(element1).click().build().perform();
+        WebElement element2 = driver.findElement(By.xpath("//*[@id=\"modal-search\"]/div/div/div/div[2]/div[1]/div[1]/div/div[2]/a/ul/li[2]"));
+        act.moveToElement(element2).click().build().perform();
+
+
+    }
+
+    @When("Filtro por {string}")
+    public void filtroPor(String arg0) {
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"modal-search\"]/div/div/div/div[1]/div/ul[1]/div/li[1]/div/div[1]/label/input"));
+        Actions act = new Actions(driver);
+        act.moveToElement(element).click().build().perform();
+    }
+
+    @And("Añado el primer producto")
+    public void añadoElPrimerProducto() {
+        //Solo funciona con la busqueda de "100% Real Whey Protein 1000 g"
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/div/a[2]/picture/img"));
+        Actions act = new Actions(driver);
+        act.moveToElement(element).click().build().perform();
+        WebElement element2 = driver.findElement(By.xpath("//*[@id=\"carouselPicker\"]/div[1]/img"));
+        act.moveToElement(element2).click().build().perform();
+        driver.findElement(By.xpath("//*[@id=\"actionButton\"]")).click();
+    }
+
+    @And("Elimino el primer producto")
+    public void eliminoElPrimerProducto() {
+        driver.findElement(By.className("card-discard")).click();
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"formulate-global-6\"]")));
+        driver.findElement(By.id("formulate-global-6")).click();
+    }
 }

@@ -16,10 +16,7 @@ Feature: Registro
 #  elimina los productos
 #  comprueba que los productos se han eliminado
 
-  Scenario: Carrito vacío
-    Given Voy a la pagina de inicio
-    When Voy al carrito
-    Then Deberia ver el texto "Tu carrito de la compra está vacío.!"
+
 
   Scenario: Registro vacio
     Given Voy a la pagina de inicio
