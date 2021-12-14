@@ -171,10 +171,34 @@ public class WebStepDefinitions {
     }
 
     @And("Elimino el primer producto")
-    public void eliminoElPrimerProducto() {
+    public void eliminoElPrimerProducto() throws InterruptedException {
         driver.findElement(By.className("card-discard")).click();
-        //WebDriverWait wait = new WebDriverWait(driver,20);
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"formulate-global-6\"]")));
-        //driver.findElement(By.id("formulate-global-6")).click();
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"chkLists\"]/section/section")));
+        driver.findElement(By.xpath("//*[@id=\"chk-modal-wrapper\"]/div/div[2]/div[2]/form/div[2]/div/div")).click();
+    }
+
+    @When("Abro el menu")
+    public void abroElMenu() {
+        driver.findElement(By.id("the_h_menu")).click();
+
+    }
+
+    @When("Selecciono la categoria {string}")
+    public void seleccionoLaCategoria(String arg0) {
+        Actions builder = new Actions(driver);
+        WebElement element1 = driver.findElement(By.xpath("//*[@id=\"lateral-menu\"]/div/div/div["+ arg0 + "]"));
+        builder.moveToElement(element1).perform();
+    }
+
+    @Then("Veo el submenu")
+    public void veoElSubmenu() {
+        Assertions.assertTrue(driver.findElement(By.id("submenuAll")).isDisplayed());
+    }
+
+
+    @When("Hago clic en el boton con id {string}")
+    public void hagoClicEnElBotonConId(String arg0) {
+        driver.findElement(By.id(arg0)).click();
     }
 }
