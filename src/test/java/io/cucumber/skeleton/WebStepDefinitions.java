@@ -168,8 +168,8 @@ public class WebStepDefinitions {
     @And("Elimino el primer producto")
     public void eliminoElPrimerProducto() {
         driver.findElement(By.className("card-discard")).click();
-        WebDriverWait wait = new WebDriverWait(driver,20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"formulate-global-6\"]")));
-        driver.findElement(By.id("formulate-global-6")).click();
+        //WebDriverWait wait = new WebDriverWait(driver,20);
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"formulate-global-6\"]")));
+        //driver.findElement(By.id("formulate-global-6")).click();
     }
 }
