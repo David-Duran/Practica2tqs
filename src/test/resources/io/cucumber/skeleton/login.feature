@@ -12,7 +12,7 @@ Feature: Login
     And Inserto el texto "practicastqs" en el boton "Login_password"
     And Iniciar sesión
     And Espero "1" segundo
-    Then Deberia ver el texto "tqs"
+    Then Deberia ver el texto "Tqsa"
 
   Scenario: Contraseña incorrecta
     Given Voy a la pagina de inicio

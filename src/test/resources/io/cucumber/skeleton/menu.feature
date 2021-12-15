@@ -5,7 +5,6 @@ Feature: El usuario abre el menu y interacciona con el
   Scenario: Abro el menu
     Given Voy a la pagina de inicio
     And Espero "2" segundo
-    And Acepto las cookies
     When Abro el menu
     And Espero "2" segundo
     Then Deberia ver el texto "Alimentación Saludable"
@@ -14,7 +13,6 @@ Feature: El usuario abre el menu y interacciona con el
   Scenario: Selecciono categoria de menu
     Given Voy a la pagina de inicio
     And Espero "2" segundo
-    And Acepto las cookies
     And Abro el menu
     And Espero "2" segundo
     When Selecciono la categoria "2"
@@ -24,7 +22,6 @@ Feature: El usuario abre el menu y interacciona con el
 Scenario: Selecciono una opcion de una categoria del menu
   Given Voy a la pagina de inicio
   And Espero "2" segundo
-  And Acepto las cookies
   And Abro el menu
   And Espero "2" segundo
   And Selecciono la categoria "3"

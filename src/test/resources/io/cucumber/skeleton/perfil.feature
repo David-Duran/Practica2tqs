@@ -7,7 +7,7 @@ Feature: El usuario modifica opciones de perfil
     And Iniciar sesión
     And Hago clic en mi perfil
     And Hago clic en el boton de "Datos de la cuenta"
-    And Inserto el texto "tqs2" en el boton "Account_firstname"
+    And Elimino nombre
     And Guardo los cambios
     And Espero "2" segundo
     Then Deberia ver el texto "Lo sentimos, se encontró un problema en los datos enviados."
@@ -20,10 +20,12 @@ Feature: El usuario modifica opciones de perfil
     And Iniciar sesión
     And Hago clic en mi perfil
     And Hago clic en el boton de "Datos de la cuenta"
+    And Elimino nombre
     And Inserto el texto "tqs2" en el boton "Account_firstname"
-    And Inserto el texto "652728914" en el boton "Account_telephone"
     And Espero "2" segundo
+    And Acepto las cookies
     And Guardo los cambios
+    And Espero "2" segundo
     Then Deberia ver el texto "Tu cuenta personal se ha actualizado correctamente."
 
   Scenario: El usuario añade una dirección de envio
@@ -35,12 +37,17 @@ Feature: El usuario modifica opciones de perfil
     And Hago clic en mi perfil
     And Espero "2" segundo
     And Hago clic en el boton de "Libreta de direcciones"
-    And Añado una dirección
-    And Inserto el texto "tqs" en el boton "Address_name"
+    And Espero "2" segundo
+    And Acepto las cookies
+    And Nueva direccion
+    And Espero "2" segundo
+    And Inserto el texto "alumnostqs" en el boton "Address_name"
     And Inserto el texto "8888" en el boton "Address_street_address"
     And Inserto el texto "sfasdjfadfa" en el boton "Address_house_number"
-    And Inserto el texto "codigopostalenletras" en el boton "Address_postcode"
+    And Inserto el texto "08445" en el boton "Address_postcode"
     And Inserto el texto "Bellaterra" en el boton "Address_city"
     And Inserto el texto "665433254" en el boton "Address_telephone"
-    And Hago clic en el boton de "AÑADIR DIRECCIÓN"
     And Espero "2" segundo
+    And Añado direccion
+    And Espero "3" segundo
+    Then Deberia ver el texto "Modificar la dirección"

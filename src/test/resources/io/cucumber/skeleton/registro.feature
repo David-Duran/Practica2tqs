@@ -8,16 +8,6 @@ Feature: Registro
     When Hago clic en el boton de "Crear cuenta"
     Then Deberia ver el boton de "CreateAccount_firstname"
 
-#Feature: Carrito
-#  El usuario entra a la pagina web
-#  comprueba que su carrito esta vacío
-#  añade productos al carrito
-#  comprueba que los productos se han añadido
-#  elimina los productos
-#  comprueba que los productos se han eliminado
-
-
-
   Scenario: Registro vacio
     Given Voy a la pagina de inicio
     Then Deberia ver el boton de "register__link"

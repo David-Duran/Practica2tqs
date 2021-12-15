@@ -69,7 +69,6 @@ public class WebStepDefinitions {
     @When("Hago clic en el boton de {string}")
     public void hagoClicEnElBotonDe(String boton) {
         driver.findElement(By.linkText(boton)).click();
-
     }
 
     @When("Crear cuenta")
@@ -222,11 +221,21 @@ public class WebStepDefinitions {
         driver.findElement(By.xpath("//*[@id=\"preview_profile_photo_form\"]/a")).click();
     }
 
-    @And("Añado una dirección")
-    public void añadoUnaDirección() {
+    @And("Nueva direccion")
+    public void nuevaDireccion() {
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"dashboard_content\"]/div/div[2]/div[1]/div[2]/a/div"));
+        Actions act = new Actions(driver);
+        act.moveToElement(element).click().build().perform();
 
-        WebDriverWait wait = new WebDriverWait(driver,20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Address_name")));
-        driver.findElement(By.xpath("//*[@id=\"dashboard_content\"]/div/div[2]/div[1]/div[2]/a/div")).click();
+    }
+
+    @And("Añado direccion")
+    public void añadoDireccion() {
+        driver.findElement(By.xpath("//*[@id=\"frmAddress\"]/div/div[3]/div/input[14]")).click();
+    }
+
+    @And("Elimino nombre")
+    public void eliminoNombre() {
+        driver.findElement(By.id("Account_firstname")).clear();
     }
 }
