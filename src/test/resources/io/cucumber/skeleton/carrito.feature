@@ -1,4 +1,10 @@
-Feature: 
+Feature: El usuario entra a la pagina web
+  comprueba que su carrito esta vacío
+  añade productos al carrito
+  comprueba que los productos se han añadido
+  elimina los productos
+  comprueba que los productos se han eliminado
+
   Scenario: Carrito vacío
     Given Voy a la pagina de inicio
     When Voy al carrito

@@ -148,8 +148,6 @@ public class WebStepDefinitions {
         act.moveToElement(element1).click().build().perform();
         WebElement element2 = driver.findElement(By.xpath("//*[@id=\"modal-search\"]/div/div/div/div[2]/div[1]/div[1]/div/div[2]/a/ul/li[2]"));
         act.moveToElement(element2).click().build().perform();
-
-
     }
 
     @When("Filtro por {string}")
