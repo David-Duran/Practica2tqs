@@ -201,4 +201,34 @@ public class WebStepDefinitions {
     public void hagoClicEnElBotonConId(String arg0) {
         driver.findElement(By.id(arg0)).click();
     }
+
+    @And("Hago clic en mi perfil")
+    public void hagoClicEnMiPerfil() {
+        driver.findElement(By.className("account-box")).click();
+    }
+
+    @And("Guardo los cambios")
+    public void guardoLosCambios() {
+        WebElement element = driver.findElement(By.name("yt0"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().perform();
+    }
+
+    @And("Hago clic en Foto de Perfil")
+    public void hagoClicEnFotoDePerfil() {
+        driver.findElement(By.xpath("//*[@id=\"dashboard_content\"]/div/div[2]/div[1]/div/div/div[2]")).click();
+    }
+
+    @And("Añado la foto de perfil")
+    public void añadoLaFotoDePerfil() {
+        driver.findElement(By.xpath("//*[@id=\"preview_profile_photo_form\"]/a")).click();
+    }
+
+    @And("Añado una dirección")
+    public void añadoUnaDirección() {
+
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Address_name")));
+        driver.findElement(By.xpath("//*[@id=\"dashboard_content\"]/div/div[2]/div[1]/div[2]/a/div")).click();
+    }
 }
